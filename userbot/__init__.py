@@ -645,7 +645,7 @@ with bot:
                 reply_pop_up_alert = (
                     f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
                 )
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=False)
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     except BaseException:
         LOGS.info(
