@@ -630,7 +630,7 @@ with bot:
                         + " "
                     )
                 else:
-                    help_string = str(CMD_HELP[modul_name]).replace("`", "")
+                    help_string = str(CMD_HELP[modul_name]).replace("`", "").replace("**", "")
 
                 reply_pop_up_alert = (
                     help_string
@@ -643,7 +643,7 @@ with bot:
                 reply_pop_up_alert = (
                     f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
                 )
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=False)
 
     except BaseException:
         LOGS.info(
