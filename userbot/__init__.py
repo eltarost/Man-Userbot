@@ -616,7 +616,7 @@ with bot:
         @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ub_modul_(.*)")))
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid or event.query.user_id in SUDO_USERS:
-                modul_name = event.data_match.group(1).decode("UTF-8")
+                event.data_match.group(1).decode("UTF-8")
                 help_string = ""
                 try:
                     for i in CMD_HELP[plugin_name]:
@@ -628,7 +628,11 @@ with bot:
                     reply_pop_up_alert = "{} is useless".format(plugin_name)
                 else:
                     reply_pop_up_alert = help_string
-                reply_pop_up_alert += ("Gunakan .uninstall {} untuk menghapus modules ini".format(plugin_name))
+                reply_pop_up_alert += (
+                    "Gunakan .uninstall {} untuk menghapus modules ini".format(
+                        plugin_name
+                    )
+                )
                 try:
                     await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
                 except BaseException:
