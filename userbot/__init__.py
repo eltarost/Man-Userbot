@@ -619,11 +619,11 @@ with bot:
                 modul_name = event.data_match.group(1).decode("UTF-8")
 
                 cmdhel = str(CMD_HELP[modul_name])
-                if len(cmdhel) > 250:
+                if len(cmdhel) > 200:
                     help_string = (
                         str(CMD_HELP[modul_name])
                         .replace("`", "")
-                        .replace("**", "")[:250]
+                        .replace("**", "")[:200]
                         + "..."
                         + "\n\nBaca Teks Berikutnya Ketik .help "
                         + modul_name
