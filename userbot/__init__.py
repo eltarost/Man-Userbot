@@ -429,7 +429,7 @@ with bot:
         dugmeler = CMD_HELP
         user = bot.get_me()
         uid = user.id
-        uname = user.first_name
+        owner = user.first_name
         logo = ALIVE_LOGO
         logoman = INLINE_PIC
         tgbotusername = BOT_USERNAME
@@ -564,7 +564,9 @@ with bot:
                     link_preview=False,
                 )
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {uname}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {owner}"
+                )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(
@@ -578,7 +580,9 @@ with bot:
                 buttons = paginate_help(current_page_number + 1, dugmeler, "helpme")
                 await event.edit(buttons=buttons)
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {uname}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
@@ -589,7 +593,9 @@ with bot:
                     "⚜️ **Help Mode Button Ditutup!** ⚜️", buttons=openlagi
                 )
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {uname}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {owner}"
+                )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(
@@ -604,7 +610,7 @@ with bot:
                 await event.edit(buttons=buttons)
             else:
                 reply_pop_up_alert = (
-                    f"Kamu Tidak diizinkan, ini Userbot Milik {user.first_name}"
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {owner}"
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
@@ -637,7 +643,9 @@ with bot:
                     )
                 )
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {uname}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {owner}"
+                )
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     except BaseException:
