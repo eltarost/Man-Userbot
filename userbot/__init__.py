@@ -616,7 +616,7 @@ with bot:
         @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ub_modul_(.*)")))
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid or event.query.user_id in SUDO_USERS:
-                event.data_match.group(1).decode("UTF-8")
+                plugin_name = event.data_match.group(1).decode("UTF-8")
                 help_string = ""
                 try:
                     for i in CMD_HELP[plugin_name]:
