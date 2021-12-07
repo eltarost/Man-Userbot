@@ -9,7 +9,7 @@
 #
 """ Userbot initialization. """
 
-
+import io
 import os
 import re
 import sys
@@ -617,26 +617,30 @@ with bot:
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid or event.query.user_id in SUDO_USERS:
                 modul_name = event.data_match.group(1).decode("UTF-8")
-
-                cmdhel = str(CMD_HELP[modul_name])
-                if len(cmdhel) > 150:
-                    help_string = (
-                        str(CMD_HELP[modul_name]).replace("`", "")[:150]
-                        + "..."
-                        + "\n\nBaca Teks Berikutnya Ketik .help "
-                        + modul_name
-                        + " "
-                    )
+                help_string = ""
+                try:
+                    for i in CMD_HELP[plugin_name]:
+                        help_string += i
+                        help_string += "\n"
+                except BaseException:
+                    pass
+                if help_string == "":
+                    reply_pop_up_alert = "{} is useless".format(plugin_name)
                 else:
-                    help_string = str(CMD_HELP[modul_name]).replace("`", "")
-
-                reply_pop_up_alert = (
-                    help_string
-                    if help_string is not None
-                    else "{} Tidak ada dokumen yang telah ditulis untuk modul.".format(
-                        modul_name
-                    )
-                )
+                    reply_pop_up_alert = help_string
+                reply_pop_up_alert += ("Gunakan .uninstall {} untuk menghapus modules ini".format(plugin_name))
+                try:
+                    await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+                except BaseException:
+                    with io.BytesIO(str.encode(reply_pop_up_alert)) as out_file:
+                        out_file.name = "{}.txt".format(plugin_name)
+                        await event.client.send_file(
+                            event.chat_id,
+                            out_file,
+                            force_document=True,
+                            allow_cache=False,
+                            caption=plugin_name,
+                        )
             else:
                 reply_pop_up_alert = (
                     f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
