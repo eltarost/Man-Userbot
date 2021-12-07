@@ -623,6 +623,7 @@ with bot:
                     help_string = (
                         str(CMD_HELP[modul_name])
                         .replace("`", "")
+                        .replace(" **", "")
                         .replace("**", "")[:150]
                         + "..."
                         + "\n\nBaca Teks Berikutnya Ketik .help "
